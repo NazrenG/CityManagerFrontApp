@@ -1,3 +1,31 @@
+// Register formunu işləyən event
+document
+  .getElementById("registerForm")
+  .addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const username = document.getElementById("username_register").value;
+    const password = document.getElementById("password_register").value;
+
+    try {
+      const request = await fetch("https://localhost:7227/api/Auth/Register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (request.ok) {
+        alert("Register successful!");
+      } else {
+        alert("Register failed: ");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  });
+
 // Login formunu işləyən event
 document
   .getElementById("loginForm")
